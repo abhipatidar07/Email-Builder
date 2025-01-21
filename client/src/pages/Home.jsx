@@ -21,7 +21,7 @@ const EmailEditor = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/getEmailLayout")
+      .get("https://email-builder-b1og.onrender.com/getEmailLayout")
       .then((response) => {
         setTemplate(response.data);
         console.log(response);
@@ -38,7 +38,7 @@ const EmailEditor = () => {
 
   const saveTemplate = () => {
     axios
-      .post("http://localhost:5000/uploadEmailConfig", template)
+      .post("https://email-builder-b1og.onrender.com/uploadEmailConfig", template)
       .then(() => {
         alert("Template saved to database successfully!");
       })
@@ -82,7 +82,7 @@ const EmailEditor = () => {
 
       try {
         const response = await axios.post(
-          "http://localhost:5000/uploadImage",
+          "https://email-builder-b1og.onrender.com/uploadImage",
           formData,
           {
             headers: { "Content-Type": "multipart/form-data" },

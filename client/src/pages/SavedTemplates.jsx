@@ -12,7 +12,7 @@ const SavedTemplates = () => {
 
   const fetchTemplates = () => {
     axios
-      .get("http://localhost:5000/renderAndDownloadTemplate")
+      .get("https://email-builder-b1og.onrender.com/renderAndDownloadTemplate")
       .then((response) => {
         setTemplates(response.data);
         localStorage.setItem("template", JSON.stringify(response.data));
@@ -157,7 +157,7 @@ const SavedTemplates = () => {
     alert("Template deleted Successfully from Database");
 
     axios
-      .delete(`http://localhost:5000/renderAndDownloadTemplate/${templateId}`)
+      .delete(`https://email-builder-b1og.onrender.com/renderAndDownloadTemplate/${templateId}`)
       .catch((error) => console.error("Error deleting template:", error));
   };
 
