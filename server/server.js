@@ -21,13 +21,21 @@ database.connect();
 
 const upload = multer({ dest: "uploads/" });
 
+// app.post("/uploadImage", upload.single("image"), (req, res) => {
+//   const file = req.file;
+//   const imageUrl = `${req.protocol}://${req.get("host")}/uploads/${
+//     file.filename
+//   }`;
+//   res.json({ url: imageUrl });
+// });
 app.post("/uploadImage", upload.single("image"), (req, res) => {
   const file = req.file;
-  const imageUrl = `${req.protocol}://${req.get("host")}/uploads/${
-    file.filename
-  }`;
+  // Dynamically replace the protocol and host if in production
+  const host = process.env.NODE_ENV === "production" ? "https://email-builder-b1og.onrender.com" : req.get("host");
+  const imageUrl = `${req.protocol}://${host}/uploads/${file.filename}`;
   res.json({ url: imageUrl });
 });
+
 
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
