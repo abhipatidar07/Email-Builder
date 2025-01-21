@@ -31,7 +31,7 @@ const upload = multer({ dest: "uploads/" });
 app.post("/uploadImage", upload.single("image"), (req, res) => {
   const file = req.file;
   // Dynamically replace the protocol and host if in production
-  const host = process.env.NODE_ENV === "production" ? "https://email-builder-b1og.onrender.com" : req.get("host");
+  const host = process.env.NODE_ENV === "production" ? "https://email-builder-five-wheat.vercel.app" : req.get("host");
   const imageUrl = `${req.protocol}://${host}/uploads/${file.filename}`;
   res.json({ url: imageUrl });
 });
