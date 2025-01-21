@@ -55,84 +55,112 @@ const SavedTemplates = () => {
 
     const htmlContent = `
       <html>
-        <head>
-          <title>${contentWithEmbeddedImages.title}</title>
-          <style>
-            body {
-              font-family: Arial, sans-serif;
-              line-height: 1.6;
-              margin: 0;
-              padding: 20px;
-              background-color: #f9f9f9;
-              color: #333;
-            }
-            h1 {
-              font-size: 24px;
-              color: #4a90e2;
-            }
-            h2 {
-              font-size: 20px;
-              color: #666;
-            }
-            p {
-              font-size: 16px;
-              margin: 10px 0;
-            }
-            img {
-              max-width: 100%;
-              height: auto;
-            }
-            .template-container {
-              background: white;
-              padding: 20px;
-              border-radius: 8px;
-              display: flex;
-              flex-direction: column;
-              justify-content: center;
-              align-items: center;
-              box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            }
-            .template-container img:first-of-type {
-              height: 100px;
-              border-radius: 50%;
-              box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            }
-            footer {
-              margin-top: 20px;
-              font-size: 14px;
-              color: #888;
-              text-align: center;
-            }
-            @media (max-width: 768px) {
-              body {
-                padding: 10px;
-              }
-              h1 {
-                font-size: 20px;
-              }
-              h2 {
-                font-size: 18px;
-              }
-              p {
-                font-size: 14px;
-              }
-              .template-container {
-                padding: 15px;
-              }
-            }
-          </style>
-        </head>
-        <body>
-          <div class="template-container">
-            <img src="${contentWithEmbeddedImages.logo}" alt="Logo" />
-            <h1>${contentWithEmbeddedImages.title}</h1>
-            <h2>Hello ${contentWithEmbeddedImages.name}</h2>
-            <div>${contentWithEmbeddedImages.content}</div>
-            <img src="${contentWithEmbeddedImages.image}" alt="Template Image" />
-            <footer>${contentWithEmbeddedImages.footer}</footer>
-          </div>
-        </body>
-      </html>
+  <head>
+    <title>${contentWithEmbeddedImages.title}</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        padding: 20px;
+        background-color: #f9f9f9;
+        color: #333;
+      }
+      h1 {
+        font-size: 24px;
+        color: #4a90e2;
+        margin-bottom: 10px;
+      }
+      h2 {
+        font-size: 20px;
+        color: #666;
+        margin-bottom: 20px;
+      }
+      p {
+        font-size: 16px;
+        margin: 10px 0;
+      }
+      img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+        margin-bottom: 20px;
+      }
+      .template-container {
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        max-width: 600px;
+        margin: auto;
+      }
+      .template-container img:first-of-type {
+        height: 100px;
+        border-radius: 50%;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+      }
+      footer {
+        margin-top: 20px;
+        font-size: 14px;
+        color: #888;
+        text-align: center;
+      }
+      
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        body {
+          padding: 15px;
+        }
+        .template-container {
+          padding: 15px;
+        }
+        h1 {
+          font-size: 22px;
+        }
+        h2 {
+          font-size: 18px;
+        }
+        p {
+          font-size: 14px;
+        }
+        .template-container img:first-of-type {
+          height: 80px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        h1 {
+          font-size: 20px;
+        }
+        h2 {
+          font-size: 16px;
+        }
+        .template-container img:first-of-type {
+          height: 70px;
+        }
+        footer {
+          font-size: 12px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="template-container">
+      <img src="${contentWithEmbeddedImages.logo}" alt="Logo" />
+      <h1>${contentWithEmbeddedImages.title}</h1>
+      <h2>Hello ${contentWithEmbeddedImages.name}</h2>
+      <div>${contentWithEmbeddedImages.content}</div>
+      <img src="${contentWithEmbeddedImages.image}" alt="Template Image" />
+      <footer>${contentWithEmbeddedImages.footer}</footer>
+    </div>
+  </body>
+</html>
+
     `;
 
     const blob = new Blob([htmlContent], { type: "text/html" });
@@ -157,7 +185,9 @@ const SavedTemplates = () => {
     alert("Template deleted Successfully from Database");
 
     axios
-      .delete(`https://email-builder-b1og.onrender.com/renderAndDownloadTemplate/${templateId}`)
+      .delete(
+        `https://email-builder-b1og.onrender.com/renderAndDownloadTemplate/${templateId}`
+      )
       .catch((error) => console.error("Error deleting template:", error));
   };
 
@@ -166,8 +196,17 @@ const SavedTemplates = () => {
       <h2 className="text-xl font-bold font-serif mb-6 bg-gray-200 py-2">
         Saved Templates
       </h2>
-      <div className="flex flex-row gap-1 lg:text-xl text-sm justify-center mb-6"><p>Please refresh</p> <button className="border-[1px] border-gray-500 rounded-md w-[30px] hover:bg-gray-200 cursor-pointer hover:shadow-md"><IoMdRefreshCircle className="my-1 mx-auto" onClick={refreshTemplates}/></button><p> to get the latest templates!!</p></div>
-      
+      <div className="flex flex-row gap-1 lg:text-xl text-sm justify-center mb-6">
+        <p>Please refresh</p>{" "}
+        <button className="border-[1px] border-gray-500 rounded-md w-[30px] hover:bg-gray-200 cursor-pointer hover:shadow-md">
+          <IoMdRefreshCircle
+            className="my-1 mx-auto"
+            onClick={refreshTemplates}
+          />
+        </button>
+        <p> to get the latest templates!!</p>
+      </div>
+
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {templates.map((template) => (
           <div
